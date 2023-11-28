@@ -1,0 +1,10 @@
+[
+    {
+      "id": 1,
+      "name": "General Hospital",
+      "location": {
+        "lat": 40.712776,
+        "long": -74.005974
+      }
+    }
+  ]
