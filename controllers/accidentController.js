@@ -45,6 +45,96 @@ exports.getNearestAmbulance = (req, res) => {
   });
 };
 
+exports.getAllAccidents = (req, res) => {
+  fs.readFile(path.join(__dirname, '../data/accidents.json'), 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    const accidents = JSON.parse(data);
+    res.status(200).json(accidents);
+  });
+};
+
+exports.getAccidentById = (req, res) => {
+  const id = req.params.id;
+
+  fs.readFile(path.join(__dirname, '../data/accidents.json'), 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+
+    const accidents = JSON.parse(data);
+    const accident = accidents.find(accident => accident.id == id);
+
+    if (!accident) {
+      return res.status(404).json({ error: 'Accident not found' });
+    }
+
+    res.status(200).json(accident);
+  });
+};
+
+exports.updateAccident = (req, res) => {
+  const id = req.params.id;
+  const newAccidentData = req.body;
+
+  fs.readFile(path.join(__dirname, '../data/accidents.json'), 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+
+    let accidents = JSON.parse(data);
+    const index = accidents.findIndex(accident => accident.id == id);
+
+    if (index === -1) {
+      return res.status(404).json({ error: 'Accident not found' });
+    }
+
+    accidents[index] = { ...accidents[index], ...newAccidentData };
+
+    fs.writeFile(path.join(__dirname, '../data/accidents.json'), JSON.stringify(accidents, null, 2), err => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      res.status(200).json(accidents[index]);
+    });
+  });
+};
+
+exports.deleteAccident = (req, res) => {
+  const id = req.params.id;
+
+  fs.readFile(path.join(__dirname, '../data/accidents.json'), 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+
+    let accidents = JSON.parse(data);
+    const index = accidents.findIndex(accident => accident.id == id);
+
+    if (index === -1) {
+      return res.status(404).json({ error: 'Accident not found' });
+    }
+
+    accidents.splice(index, 1);
+
+    fs.writeFile(path.join(__dirname, '../data/accidents.json'), JSON.stringify(accidents, null, 2), err => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      res.status(200).json({ message: 'Accident deleted successfully' });
+    });
+  });
+};
+
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   const R = 6371; // Radius of the earth in km
   const dLat = deg2rad(lat2 - lat1);

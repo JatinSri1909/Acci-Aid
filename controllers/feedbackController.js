@@ -20,3 +20,14 @@ exports.receiveFeedback = (req, res) => {
     });
   });
 };
+
+exports.getAllFeedbacks = (req, res) => {
+  fs.readFile(path.join(__dirname, '../data/feedbacks.json'), 'utf-8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    const feedbacks = JSON.parse(data);
+    res.status(200).json(feedbacks);
+  });
+};
