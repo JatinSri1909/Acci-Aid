@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="image/logo.jpg">
+    <title>AcciAid</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        nav {
+            width: 100%;
+            height: 80px;
+            background-color: #218db1;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            display: inline;
+        }
+
+        .main-heading {
+            display: inline;
+            color: #fff;
+            font-size: 50px;
+            line-height: 80px;
+            margin-left: 39%;
+        }
+
+        #float {
+            float: left;
+        }
+
+        .page {
+            width: 100%;
+            height: 540px;
+
+        }
+
+        .page h1 {
+            text-align: center;
+            font-size: 80px;
+            color: #218db1;
+        }
+
+        .page p {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 21px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        nav a {
+            position: absolute;
+            top: 20px;
+            left: 80%;
+            z-index: 1;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 17.8px;
+        }
+
+        nav a:hover {
+            color: black;
+            background-color: white;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .line {
+            width: 100%;
+            height: 2px;
+            background-color: darkslategrey;
+        }
+
+        .features {
+            padding: 50px 12%;
+            font-size: 22px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            flex-wrap: wrap;
+            padding: 50px 0;
+        }
+
+        .text-col,
+        .img-col {
+            flex-basis: 50%;
+            margin-bottom: 20px;
+        }
+
+        .img-col img {
+            display: block;
+            width: 90%;
+            margin: auto;
+        }
+
+        .features h2 {
+            font-size: 50px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .end p {
+            margin: 80px;
+            font-size: 4vh;
+        }
+
+        .footer {
+            background-color: #e6f5f9;
+            padding: 10px 15% 10px;
+            border-top: 2px solid #9d9a9a;
+            color: black;
+        }
+
+        .footer h2 {
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .footer .col {
+            flex-basis: 25%;
+            flex-grow: 1;
+            margin-bottom: 5px;
+        }
+
+        .footer .col a {
+            display: block;
+            color: black;
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-decoration: none;
+        }
+
+        .footer .col a:hover {
+            color: #218db1;
+        }
+
+        .footer .row {
+            align-items: flex-start;
+            padding: 5px 0px;
+        }
+
+        .copyright-text {
+            font-size: 14px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div id="float">
+            <img src="image/logo.jpg" class="logo">
+        </div>
+        <div class="float">
+            <h1 class="main-heading">AcciAid</h1>
+        </div>
+        <div class="float">
+            <a href="login.html">Login</a>
+        </div>
+    </nav>
+    <div class="page" id="float">
+        <h1>AcciAid</h1><br>
+        <p>AcciAid is a revolutionary project designed to address a critical need in emergency healthcare services.
+            With a mission to make the process of accessing medical care during an accident as seamless and
+            efficient as possible, AcciAid leverages advanced technology to provide immediate assistance to those in
+            distress. By connecting users to the nearest ambulance services, it ensures that help arrives promptly,
+            potentially making the difference between life and death in critical situations.
+            <br><br>
+            Moreover, AcciAid goes a step further by not only directing individuals to the closest ambulance but
+            also providing essential information about the availability of valid seats and rooms in hospitals
+            nearby. This feature is invaluable in times of crisis, as it allows users to make informed decisions
+            regarding the choice of medical facility, ensuring that they receive the care they need without delay.
+        </p>
+    </div>
+    <div class="line" id="float"></div>
+    <div class="features">
+        <div class="row">
+            <div class="text-col">
+                <h2>Ambulance services.</h2>
+                <p>We will ensure to provide you ambulance anywhere,anytime when needed.</p>
+            </div>
+            <div class="img-col">
+                <img src="image/ambulance.jpg" alt="feature-1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="img-col">
+                <img src="image/android.jpg" alt="feature-2">
+            </div>
+            <div class="text-col">
+                <h2>Android app services.</h2>
+                <p>There is a separate app for your convinence.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-col">
+                <h2>An emergency button.</h2>
+                <p>One who needs help will get an emergency button on the nearest pole too.</p>
+            </div>
+            <div class="img-col">
+                <img src="image/emergency button.jpg" alt="feature-3">
+            </div>
+        </div>
+        <div class="row">
+            <div class="img-col">
+                <img src="image/hospital.avif" alt="feature-4">
+            </div>
+            <div class="text-col">
+                <h2>Details of vacant hospitals.</h2>
+                <p>You will be provided the details of nearby hospitals, vacant rooms etc.</p>
+            </div>
+        </div>
+    </div>
+    <div class="end">
+        <p>AcciAid's commitment to improving emergency response and healthcare access makes it a significant step
+            towards safeguarding lives and enhancing the efficiency of our healthcare system.</p>
+    </div>
+    <div class="footer">
+        <h2>Questions? Call 000-000-000-0000</h2>
+
+        <div class="row">
+            <div class="col">
+                <a href="#">Contact</a>
+                <a href="#">Help centre</a>
+                <a href="#">Cookie Preferences</a>
+                <a href="#">Terms of Use</a>
+            </div>
+        </div>
+        <p class="copyright-text">KIET GROUP OF INSTITUTIONS: INNOTECH.</p>
+    </div>
+    <script>
+        fetch('/accident')
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+
+</html>

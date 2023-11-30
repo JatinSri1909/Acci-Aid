@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./jquery-ui-1.13.2/jquery-ui.css">
+    <link rel="stylesheet" href="./jquery-ui-1.13.2/jquery-ui.structure.css">
+    <link rel="stylesheet" href="./jquery-ui-1.13.2/jquery-ui.theme.css">
+    <script src="./jquery-3.6.1.min.js"></script>
+    <script src="./jquery-ui-1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <title>AcciAid</title>
+    <link rel="icon" type="image/x-icon" href="image/logo.jpg">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        nav {
+            width: 100%;
+            height: 80px;
+            background-color: #218db1;
+            float: left;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            display: inline;
+        }
+
+        .main-heading {
+            display: inline;
+            color: #fff;
+            font-size: 50px;
+            line-height: 80px;
+            margin-left: 39%;
+        }
+
+        #float {
+            float: left;
+        }
+
+        .container {
+            float: left;
+            width: 60%;
+            height: 450px;
+            background-color: #fff;
+            border: 4px solid #2b8bac;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-top: 60px;
+            margin-left: 20%;
+        }
+
+        .table {
+            width: 35%;
+            height: 450px;
+            /* background-color: black; */
+            margin-left: 6px;
+        }
+
+        .patient-details {
+            width: 550px;
+            height: 100px;
+            margin-top: -100px;
+        }
+
+        #f1,
+        #f2 {
+            width: 50%;
+            height: 30px;
+            margin-left: 5%;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            color: black;
+            font-size: 18px;
+            margin-top: -15px;
+            background-color: rgba(45, 44, 44, 0.3);
+            padding-left: 15px;
+            padding-right: 45px;
+        }
+
+        .but {
+            width: 50%;
+            height: 30px;
+            margin-left: 5%;
+            border-radius: 15px;
+            border: none;
+            outline: none;
+            color: black;
+            font-size: 18px;
+            background-color: rgba(45, 44, 44, 0.3);
+            text-align: center;
+        }
+
+        .but:hover {
+            cursor: pointer;
+            background-color: #218db1;
+            color: white;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #218db1;
+            text-align: center;
+        }
+
+        #projects {
+            width: 91%;
+            height: 390px;
+            margin-left: 8px;
+        }
+
+        ol li {
+            border: 1px dotted black;
+            cursor: pointer;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        li input {
+            margin-left: 5px;
+        }
+
+        li input:disabled {
+            color: #218db1;
+        }
+
+        ol li:hover {
+            background-color: #218db1;
+        }
+
+        li a {
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#projects").tabs();
+            $("ul").sortable({ axis: "x", containment: "#projects" });
+            $("ol").sortable({ axis: "y", containment: "#projects" });
+        })
+    </script>
+</head>
+
+<body>
+    <nav id="float">
+        <div id="float">
+            <img src="image/logo.jpg" class="logo">
+        </div>
+        <div class="float">
+            <h1 class="main-heading">AcciAid</h1>
+        </div>
+    </nav>
+    <div class="container" style="display: flex; justify-content: space-between;">
+        <div id="mapid" style="height: calc(60vh); width: 70%;"></div>
+        <div class="table" id="float" style="width: 30%;">
+            <h2>List of Hospitals Near By</h2>
+            <div id="projects">
+                <ul id="main">
+                    <li><a href="#personal">Hospital Name & ICU Availability</a></li>
+                </ul>
+                <ol id="personal">
+                    <li>Hospital 1<input type="checkbox" disabled checked value="1"></li>
+                    <li>Hospital 2<input type="checkbox" disabled checked value="1"></li>
+                    <li>Hospital 3<input type="checkbox" disabled unchecked value="1"></li>
+                    <li>Hospital 4<input type="checkbox" disabled checked value="1"></li>
+                    <li>Hospital 5<input type="checkbox" disabled unchecked value="1"></li>
+                    <li>Hospital 6<input type="checkbox" disabled unchecked value="1"></li>
+                    <li>Hospital 7<input type="checkbox" disabled checked value="1"></li>
+                    <li>Hospital 8<input type="checkbox" disabled checked value="1"></li>
+                    <li>Hospital 9<input type="checkbox" disabled unchecked value="1"></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <script>
+        var mymap = L.map('mapid').setView([28.753186378592773, 77.49449147474208], 13);
+    
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(mymap);
+    
+        Promise.all([
+    fetch('http://localhost:5000/data/accidents.json'),
+    fetch('http://localhost:5000/data/ambulances.json'),
+    fetch('http://localhost:5000/data/hospitals.json')
+]).then(function (responses) {
+    return Promise.all(responses.map(function (response) {
+        return response.json();
+    }));
+}).then(function (data) {
+    var accidentMarker = L.marker([data[0][0].location.lat, data[0][0].location.long]).addTo(mymap);
+    accidentMarker.bindPopup("<b>Accident</b>").openPopup();
+
+    data[1].forEach(function(ambulance) {
+        if (ambulance.availability === "true") {
+            var ambulanceMarker = L.marker([ambulance.latitude, ambulance.longitude]).addTo(mymap);
+            ambulanceMarker.bindPopup("<b>Ambulance</b><br>Driver: " + ambulance.driverName).openPopup();
+        }
+    });
+
+    var hospitalMarker = L.marker([data[2][0].location.lat, data[2][0].location.long]).addTo(mymap);
+    hospitalMarker.bindPopup("<b>Hospital</b>").openPopup();
+}).catch(function (error) {
+    console.error('Error:', error);
+});
+    </script>
+</body>
+
+</html>
