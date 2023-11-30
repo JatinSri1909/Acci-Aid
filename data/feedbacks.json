@@ -2,5 +2,25 @@
     {
       "id": 1,
       "message": "Great service!"
+    },
+
+    {
+      "id": 2,
+      "message": "Fast response time!"
+    },
+
+    {
+      "id": 3,
+      "message": "Very professional!"
+    },
+
+    {
+      "id": 4,
+      "message": "I would recommend to anyone!"
+    },
+
+    {
+      "id": 5,
+      "message": "I will definitely use again!"
     }
   ]

@@ -18,7 +18,7 @@ app.use('/notification', notificationRoutes);
 app.use('/feedback', feedbackRoutes);
 
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Hello Ishita!');
 });
 
 app.listen(PORT, () => {

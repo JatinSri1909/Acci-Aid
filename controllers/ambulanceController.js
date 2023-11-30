@@ -48,6 +48,29 @@ const ambulanceController = {
       });
     });
   },
+  createAmbulance: (req, res) => {
+    const newAmbulance = req.body;
+
+    fs.readFile(path.join(__dirname, '../data/ambulances.json'), 'utf-8', (err, data) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+
+      const ambulances = JSON.parse(data);
+
+      ambulances.push(newAmbulance);
+
+      fs.writeFile(path.join(__dirname, '../data/ambulances.json'), JSON.stringify(ambulances, null, 2), (err) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ error: 'Internal server error' });
+        }
+
+        res.status(201).json(newAmbulance);
+      });
+    });
+  },
 };
 
 module.exports = ambulanceController;

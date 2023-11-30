@@ -6,5 +6,41 @@
         "lat": 40.712776,
         "long": -74.005974
       }
+    },
+
+    {
+      "id": 2,
+      "name": "City Hospital",
+      "location": {
+        "lat": 40.712776,
+        "long": -74.005974
+      }
+    },
+
+    {
+      "id": 3,
+      "name": "St. Mary's Hospital",
+      "location": {
+        "lat": 40.712776,
+        "long": -74.005974
+      }
+    },
+
+    {
+      "id": 4,
+      "name": "St. Joseph's Hospital",
+      "location": {
+        "lat": 40.712776,
+        "long": -74.005974
+      }
+    },
+
+    {
+      "id": 5,
+      "name": "St. John's Hospital",
+      "location": {
+        "lat": 40.712776,
+        "long": -74.005974
+      }
     }
   ]

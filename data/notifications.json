@@ -2,5 +2,10 @@
     {
       "id": 1,
       "message": "New accident reported."
+    },
+
+    {
+      "id": 2,
+      "message": "Accident reported at 123 Main St."
     }
   ]
